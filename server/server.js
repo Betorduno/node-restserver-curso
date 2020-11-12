@@ -3,9 +3,10 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 
-app.use(require('./routes/usuarios'));
+//configuracion global de rutas
+app.use(require('./routes/index'));
 
-mongoose.connect(process.env.URLDB, {
+mongoose.connect(process.env.urlDB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,

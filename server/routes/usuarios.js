@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const _ = require('underscore')
 const bodyParser = require('body-parser')
 const Usuario = require('../models/usuario')
+const { verificarToken, verifyRolUser } = require('../middlewares/auth');
 
 
 // parse application/x-www-form-urlencoded
@@ -12,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.get('/usuario', function (req, res) {
+app.get('/usuario', verificarToken, (req, res)=> {
 
   let desde =req.query.desde || 0
   desde = Number(desde);
@@ -45,7 +46,7 @@ app.get('/usuario', function (req, res) {
     })
 })
 
-app.post('/usuario', function (req, res) {
+app.post('/usuario', [verificarToken, verifyRolUser], (req, res)=>{
   let body = req.body
   
   let user = new Usuario({
@@ -69,7 +70,7 @@ app.post('/usuario', function (req, res) {
   })
 })
 
-app.put('/usuario/:id', function (req, res) {
+app.put('/usuario/:id', [verificarToken, verifyRolUser], (req, res) => {
 
   let id = req.params.id;
   //(underscore)_.pick regresa un object filtrado por los campos que se estipulan en el array.
@@ -90,7 +91,7 @@ app.put('/usuario/:id', function (req, res) {
   })
 })
 
-app.delete('/usuario/:id', function (req, res) {
+app.delete('/usuario/:id', [verificarToken, verifyRolUser], (req, res) => {
 
   let id = req.params.id;
   let cambiaEstado = {
