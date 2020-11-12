@@ -86,8 +86,6 @@ app.post('/google', async (req, res)=> {
       err: e
     })
   })
-
-  console.log('este es la data de verify: ',googleUser);
   
   Usuario.findOne({ email: googleUser.email}, ( err, usuarioDB )=>{
     if(err) {
