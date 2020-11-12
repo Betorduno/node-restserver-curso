@@ -40,9 +40,7 @@ app.get('/usuario', verificarToken, (req, res)=> {
           usuarios,
           registros: conteo
         })
-      })
-
-      
+      }) 
     })
 })
 
@@ -113,10 +111,7 @@ app.delete('/usuario/:id', [verificarToken, verifyRolUser], (req, res) => {
         }
       })
     }
-    res.json({
-      ok: true,
-      usuario: userDelete
-    })
+    
 
   })
 
