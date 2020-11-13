@@ -31,7 +31,7 @@ let verifyRolUser = (req, res, next)=> {
     return res.json({
       ok:false,
       err: {
-        message: "Es posible que el usuario no tenga permisos suficientes."
+        message: "Se denegó el acceso al recurso solicitado. Es posible que el usuario no tenga permisos suficientes."
       }
     })
   }
